@@ -1,0 +1,8 @@
+
+*.class
+.class
+test
+a.out
+*.out
+/test
+.vscode

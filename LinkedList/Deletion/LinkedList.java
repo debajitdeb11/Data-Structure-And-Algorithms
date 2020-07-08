@@ -1,7 +1,5 @@
 package LinkedList.Deletion;
 
-import java.util.List;
-
 public class LinkedList {
 
     Node head;

@@ -52,7 +52,7 @@ public class LinkedList {
     }
 
     // To delete the node
-    void deleteNode(int key) {
+    void deleteNodeByKey(int key) {
 
         // Store head node
         Node temp = head;
@@ -82,6 +82,39 @@ public class LinkedList {
 
     }
 
+    void deleteNodeByPosition(int position) {
+
+        // If the List is Empty
+        if (head == null) {
+            System.out.println("List is Empty");
+            return;
+        }
+
+        // If the position is equal to the 1st Node
+        if (position == 0) {
+            head = head.next;
+            return;
+        }
+
+        Node temp = head;
+
+        // Find the previous node of the node to be deleted
+        for (int i = 0; temp != null && i < position - 1; i++) {
+            temp = temp.next;
+        }
+
+        if (temp == null || temp.next == null) {
+            System.out.println("Position doesn't exist");
+            return;
+        }
+
+        Node next = temp.next.next;
+
+        temp.next = next;
+
+        return;
+    }
+
     // Display the List
     void display() {
         Node temp = head;
@@ -109,7 +142,11 @@ public class LinkedList {
 
         llist.display(); // Display the list
 
-        llist.deleteNode(1); // 2 -> 4 -> 3
+        llist.deleteNodeByKey(1); // 2 -> 4 -> 3
+
+        llist.display();
+
+        llist.deleteNodeByPosition(0);
 
         llist.display();
     }

@@ -169,6 +169,13 @@ void deleteNodeByIndex(Node **head_ref, int index)
 
 void displayList(Node *head)
 {
+
+    if (head == NULL)
+    {
+        cout << "List is Empty\n";
+        return;
+    }
+
     Node *temp = head;
 
     while (temp != NULL)
@@ -196,8 +203,17 @@ void displayChoice()
          << "\n\t3. Insert Middle"
          << "\n\t4. Insert Back"
          << "\n\t5. Delete using key"
-         << "\n\t6. Delete Using index\n";
+         << "\n\t6. Delete Using index"
+         << "\n\t7. Delete the entire List\n";
 }
+
+// To delete the entire LinkedList
+// void deleteList(Node *head)
+// {
+//     head = NULL;
+//     free(head);
+//     return;
+// }
 
 int main()
 {
@@ -270,6 +286,9 @@ int main()
             deleteNodeByIndex(&head, index);
             displayList(head);
             break;
+
+            // case 7:
+            //     deleteList(head);
 
         default:
             displayList(head);

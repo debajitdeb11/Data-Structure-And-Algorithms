@@ -115,8 +115,19 @@ public class LinkedList {
         return;
     }
 
+    // TO delete the Entire LinkedList
+    void deleteList() {
+        head = null;
+        return;
+    }
+
     // Display the List
     void display() {
+
+        if (head == null) {
+            System.out.println("List is Empty");
+        }
+
         Node temp = head;
         while (temp != null) {
             System.out.print(temp.data);
@@ -149,6 +160,11 @@ public class LinkedList {
         llist.deleteNodeByPosition(0);
 
         llist.display();
+
+        llist.deleteList();
+
+        llist.display();
+
     }
 
 }

@@ -1,4 +1,4 @@
-package LinkedList.Introduction;
+package LinkedList.SinglyLinkedList.Introduction;
 
 public class LinkedListIntro {
 

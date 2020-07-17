@@ -1,4 +1,4 @@
-package LinkedList.Insertion;
+package LinkedList.SinglyLinkedList.Insertion;
 
 public class LinkedList {
 

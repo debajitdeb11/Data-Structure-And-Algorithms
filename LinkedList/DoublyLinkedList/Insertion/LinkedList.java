@@ -58,7 +58,7 @@ public class LinkedList {
         newNode.next = temp.next;
 
         /* Link the prev of temp to newNode */
-        temp.prev = newNode;
+        newNode.prev = temp;
 
         /* Link the nex of temp tp newNode */
         temp.next = newNode;

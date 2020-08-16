@@ -1,3 +1,5 @@
+package Mathematics.PrintPrimeNumber;
+
 import java.util.Arrays;
 
 // Implementation of Sieve of Eratosthenes

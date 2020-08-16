@@ -1,3 +1,5 @@
+package Mathematics.PrimeCheck;
+
 /* Optimized Solution for finding if a number is Prime or not */
 /* 
     Extra corner cases are added! to check if the number is 

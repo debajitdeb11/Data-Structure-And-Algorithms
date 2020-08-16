@@ -1,3 +1,5 @@
+package Mathematics.GCD;
+
 /* Solution : 1 */
 
 import java.util.Scanner;

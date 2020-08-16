@@ -1,3 +1,5 @@
+package Mathematics.PrimeFactors;
+
 public class PrimeFactorEff {
 
     public static void main(String[] args) {

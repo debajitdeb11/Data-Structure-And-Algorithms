@@ -1,3 +1,5 @@
+package Mathematics.CountDigits;
+
 import java.util.Scanner;
 
 class CountItr {

@@ -1,3 +1,5 @@
+package Mathematics.PrimeFactors;
+
 /* Optimized Algorithm for finding Prime Factor */
 
 public class PrimeFactOptimized {

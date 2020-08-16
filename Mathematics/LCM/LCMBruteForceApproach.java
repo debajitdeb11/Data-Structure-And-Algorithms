@@ -1,3 +1,5 @@
+package Mathematics.LCM;
+
 /* Brute Force approach for the computation of LCM */
 
 public class LCMBruteForceApproach {

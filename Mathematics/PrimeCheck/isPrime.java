@@ -1,3 +1,5 @@
+package Mathematics.PrimeCheck;
+
 /* Solution for finding if a number is Prime or not */
 
 public class isPrime {

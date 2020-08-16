@@ -1,3 +1,5 @@
+package Mathematics.GCD;
+
 /* Computation of GCD using Euclidean Algorithm */
 
 class EuclideanAlgo {

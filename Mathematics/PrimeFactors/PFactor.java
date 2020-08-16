@@ -1,3 +1,5 @@
+package Mathematics.PrimeFactors;
+
 /* Brute Force Approach */
 // Time Complextity: O(n^2 log n)
 

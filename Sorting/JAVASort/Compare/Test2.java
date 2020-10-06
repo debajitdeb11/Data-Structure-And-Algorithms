@@ -1,7 +1,6 @@
 package Sorting.JAVASort.Compare;
 
 import java.util.Arrays;
-import java.util.Collection;
 
 public class Test2 {
     public static void main(final String[] args) {

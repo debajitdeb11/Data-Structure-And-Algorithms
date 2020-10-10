@@ -15,7 +15,7 @@ int count_inversion (int arr[], int n) {
 
 int main() {
 
-    int arr[] = {2 , 4, 1, 3, 5 };
+    int arr[] = {2,5,8,11,3,6,9,13};
     int n = sizeof(arr)/sizeof(int);
 
     cout << count_inversion(arr, n);

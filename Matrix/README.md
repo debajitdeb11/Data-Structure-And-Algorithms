@@ -1,6 +1,6 @@
 # Multi-Dimensional Array
 
-## Standard Multidimentional Array
+## Standard Multidimentional Array (C/C++)
 
 ```
  int arr[3][2] = {{10, 20},
@@ -20,7 +20,7 @@
 
 ```
 
-## Multidimensional Array using pointer
+## Multidimensional Array using pointer (C++)
 
 ```
 int m = 3, n = 2;
@@ -32,7 +32,7 @@ for (int i = 0; i < m; i++)
 
 ```
 
-## Multidimensional Array using double pointer
+## Multidimensional Array using double pointer (C++)
 
 ```
 int m = 3, n = 2;
@@ -54,3 +54,5 @@ int m = 3, n = 2;
         cout << "\n";
     }
 ```
+### Disadvantage
+Not cache-friendly: As everything stores at contigious location

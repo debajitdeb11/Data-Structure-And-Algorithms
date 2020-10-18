@@ -39,7 +39,7 @@ DoubleHashInsert (key)
 
 ```
 
-# Codes
+# Impplementation of Open Addressing
 
 ## C++
 

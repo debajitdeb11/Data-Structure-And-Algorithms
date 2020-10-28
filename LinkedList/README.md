@@ -318,7 +318,7 @@ int main() {
 - __Doubly LinkedList__
 - __Circular LinkedList__
 
-### Singly LinkedList vs Doubly LinkedList
+### Singly LinkedList vs Doubly Linkedlist
 
 Singly LL | Doubly LL
 --- | --- | --- | --- | 
@@ -327,6 +327,179 @@ Deletion is not possible in constant time | Deletion is possible with constant t
 Insert & delete before a given node is not possible | Is possible
 
 
+### Advantages and Disadvantages of Circular Linkedlist
+
+__Advantages:__
+- We can traverse the whole list from any node
+- Implementation of algorithm like Round Robin (CPU Scheduling Algorithm)
+- We can insert at the beginning and end by just maintaining one tail reference/pointer
+
+__Disadvantage:__
+- Implementations of Operationsbecome complex
+
+
+### `O(1)` Efficient Implementation in Circular Linkedlist
+
+#### Insertion at beginning:
+
+__Naive Implementation :__
+
+```
+Node* insert_begin(Node* head, int data) {
+    
+    Node* new_node = new Node(data);
+
+    if (head == NULL)
+        new_node->next = new_node;
+    else {
+        Node* temp = head;
+
+        while(temp->next != head)
+            temp = temp->next;
+
+        temp->next = new_node;
+        new_node->next = head;
+    }
+    return new_node;
+}
+```
+ 
+__Effective Implementation :__
+
+```
+/************* Important *****************/
+// Insertion at the beginning at O(1) time
+Node* insert_beg_eff(Node* head, int data) {
+
+    Node* new_node = new Node(data);
+
+    if (head == NULL) {
+        new_node->next = new_node;
+        return new_node;
+    }
+
+    else {
+        new_node->next = head->next;
+        head->next = new_node;
+
+        int temp = new_node->data;
+        new_node->data = head->data;
+        head->data = temp;
+        return head;
+    }
+}
+
+```
+
+#### Insertion at end: 
+
+
+__Naive Implementation :__
+```
+
+// Insertion at the end at O(N) Time Complexity
+Node* insert_end(Node* head, int data) {
+    
+    Node* new_node = new Node(data);
+
+    if (head == NULL)
+        new_node->next = new_node;
+
+    else {
+        Node* temp = head;
+
+        while(temp->next != head) temp = temp->next;
+        temp->next = new_node;
+        new_node->next = head;
+    }
+    return head;
+}
+
+```
+
+__Effective Implementation :__
+
+```
+// Insertion End with O(1) Time Complexity
+Node* insert_end_eff(Node* head, int data) {
+
+    Node* new_node = new Node(data);
+
+    if (head == NULL) {
+        new_node->next = new_node;
+        return new_node;
+    }
+
+    else {
+
+        Node* temp = head;
+
+        new_node->next = temp->next;
+        temp->next = new_node;
+
+        int d = head->data;
+        head->data = new_node->data;
+        new_node->data = d;
+        return new_node;
+    }
+
+}
+```
+
+#### Deletion
+
+__Naive Implementation :__
+
+```
+
+// Deletion from head with O(N) Time Complexity
+Node* delete_head(Node* head) {
+
+    Node* temp = head;
+
+    if (head == NULL) return NULL;
+
+    if (head->next == NULL) {
+        delete(head);
+        return NULL;
+    }
+
+    while(temp->next != head)
+        temp = temp->next;
+
+        temp->next = head->next;
+
+        delete(head);
+
+    return temp->next;
+}
+```
+
+__Effective Implementation :__
+
+```
+// Deletion from the head with O(1) Time Complexity
+Node* delete_head_eff(Node* head) {
+    
+    if (head == NULL) return NULL;
+
+    if (head->next == NULL) {
+        delete(head);
+        return NULL;
+    }
+
+    head->data = head->next->data;
+    
+    Node* temp = head->next;
+    
+    head->next = head->next->next;
+
+    delete(temp);
+    
+    return head;
+}
+
+```
 
 ## Reference
 <link href="http://www.smartredirect.de/redir/clickGate.php?u=IgKHHLBT&m=1&p=bvjHgP4nHn&t=JZFI6q7h&st=&s=&splash=0&abp=1&url=https%3A%2F%2Fwww.geeksforgeeks.org%2Fskip-list%2F&r=https%3A%2F%2Fwww.google.com%2Fsearch%3Fchannel%3Dfs%26client%3Dubuntu%26q%3Dskip%2Blist">SKIPLIST</link>

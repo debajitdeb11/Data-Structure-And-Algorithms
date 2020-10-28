@@ -56,6 +56,31 @@ bool detect_loop(Node* head) {
 
 }
 
+Node* loop_deletion(Node* head) {
+
+    Node* slow = head;
+    Node* fast = head;
+
+    while (slow != NULL && fast != NULL && fast->getNext() != NULL) {
+        slow = slow->getNext();
+        fast = fast->getNext()->getNext();
+
+        if (slow == fast) {
+
+            slow = head;
+
+            while (slow->getNext() != fast->getNext()) {
+                slow = slow->getNext();
+                fast = fast->getNext();
+            }
+
+            fast->setNext(NULL);
+        }
+    }
+
+    return head;
+}
+
 void display(Node *head)
 {
 
@@ -85,9 +110,14 @@ int main()
     head->setNext(second);
     second->setNext(third);
     third->setNext(forth);
-    // forth->setNext(second);
+    forth->setNext(second);
 
     detect_loop(head) ? cout << "LOOP DETECTED\n" : cout << "NO LOOP DETECTED\n";
+
+    head = loop_deletion(head);
+
+    detect_loop(head) ? cout << "LOOP DETECTED\n" : cout << "NO LOOP DETECTED\n";
+    
 
     return 0;
 }

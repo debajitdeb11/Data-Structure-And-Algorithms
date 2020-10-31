@@ -64,7 +64,7 @@ public class TwoStack {
     // Method to pop data from stack 2
     int pop2() {
         if (top2 < MAX_SIZE) {
-            int x = a[top2--];
+            int x = a[top2++];
             return x;
         } else {
             System.out.println("Stack Underflow");

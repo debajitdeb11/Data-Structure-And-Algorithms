@@ -1,6 +1,7 @@
 /* Implementation of Tree Data Structure */
 #include <iostream>
 #include <queue>
+#include <stack>
 #include <algorithm>
 using namespace std;
 
@@ -247,6 +248,127 @@ bool children_sum_property(Node *root)
     return (root->data == sum && children_sum_property(root->left) && children_sum_property(root->right));
 }
 
+bool is_balanced(Node *root)
+{
+    if (root == NULL)
+        return true;
+
+    int lh = height(root->left);
+    int rh = height(root->right);
+
+    return (abs(lh - rh) <= 1 && is_balanced(root->left) && is_balanced(root->right));
+}
+
+/**
+ * @brief Maximum width of the Binary Tree
+ * 
+ * @param root 
+ * @return Max width of the tree 
+ */
+int max_width(Node *root)
+{
+    if (root == NULL)
+        return 0;
+
+    queue<Node *> q;
+    q.push(root);
+    int res = 0;
+    while (!q.empty())
+    {
+        int s = q.size();
+        res = max(res, s);
+        for (int i = 0; i < s; i++)
+        {
+            Node *curr = q.front();
+            q.pop();
+
+            if (curr->left != NULL)
+                q.push(curr->left);
+
+            if (curr->right != NULL)
+                q.push(curr->right);
+        }
+    }
+    return res;
+}
+
+// Global Prev variable
+Node *BTTDLL(Node *root)
+{
+    if (root == NULL)
+        return root;
+
+    static Node *prev = NULL;
+
+    Node *head = BTTDLL(root->left);
+
+    if (prev == NULL)
+        head = root;
+    else
+    {
+        root->left = prev;
+        prev->right = root;
+    }
+
+    prev = root;
+    BTTDLL(root->right);
+    return head;
+}
+
+/**
+ * @brief Prints the Tree in spiral form
+ * 
+ * @param root 
+ */
+void spiral_traversal(Node *root)
+{
+    if (root == NULL)
+        return;
+
+    stack<int> s;
+    bool reverse = false;
+
+    queue<Node *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        int size = q.size();
+
+        for (int i = 0; i < size; i++)
+        {
+            Node *curr = q.front();
+            q.pop();
+
+            if (reverse)
+            {
+                s.push(curr->data);
+            }
+            else
+            {
+                cout << curr->data << " ";
+            }
+
+            if (curr->left != NULL)
+                q.push(curr->left);
+
+            if (curr->right != NULL)
+                q.push(curr->right);
+        }
+
+        if (reverse)
+        {
+            while (!s.empty())
+            {
+                cout << s.top() << " ";
+                s.pop();
+            }
+        }
+        reverse = !reverse;
+        cout << "\n";
+    }
+}
+
 int main()
 {
 
@@ -261,7 +383,8 @@ int main()
     parent->right = new Node(2);
     parent->right->right = new Node(1);
     parent->right->left = new Node(2);
-
+    parent->left->right = new Node(1);
+    parent->left->left = new Node(2);
     inorder_traversal(root);
     cout << "\n";
     preorder_traversal(root);
@@ -285,6 +408,13 @@ int main()
     cout << "Maximum in Binary Tree = " << max_value(root) << "\n";
 
     cout << "Is children Sum = " << children_sum_property(parent) << "\n";
+
+    cout << "Is balanced : " << is_balanced(root) << " \n";
+
+    cout << "Maximum width of the Tree: " << max_width(root) << "\n";
+    cout << "Maximum width of the Tree: " << max_width(parent) << "\n";
+
+    spiral_traversal(root);
 
     return 0;
 }

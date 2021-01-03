@@ -105,13 +105,13 @@ Node *insert_rec(Node *root, int x)
         // return true;
     }
     else if (x > root->key)
-        {
-            root->right = insert_rec(root->right, x);
-        }
+    {
+        root->right = insert_rec(root->right, x);
+    }
     else
-        {
-            root->left = insert_rec(root->left, x);
-        }
+    {
+        root->left = insert_rec(root->left, x);
+    }
     return root;
 }
 
@@ -121,20 +121,22 @@ Node *insert_rec(Node *root, int x)
 * @param x Value you want to insert
 * @return Node*
 */
-Node* insert_iterative(Node* root, int x) {
-    Node* temp = new Node(x);
-    Node* parent = NULL;
-    Node* curr = root;
+Node *insert_iterative(Node *root, int x)
+{
+    Node *temp = new Node(x);
+    Node *parent = NULL;
+    Node *curr = root;
 
-    while(curr != NULL) {
+    while (curr != NULL)
+    {
         parent = curr;
 
-        if(x > curr->key)
+        if (x > curr->key)
             curr = curr->right;
-        else if(x < curr->key)
+        else if (x < curr->key)
             curr = curr->left;
         else
-            return root; 
+            return root;
     }
 
     if (parent == NULL)
@@ -146,6 +148,124 @@ Node* insert_iterative(Node* root, int x) {
         parent->left = temp;
 
     return root;
+}
+
+/**
+ * @brief Get the Successor object
+ * 
+ * @param curr 
+ * @return Node* 
+ */
+Node *getSuccessor(Node *curr)
+{
+    curr = curr->right;
+    while (curr != NULL && curr->left != NULL)
+    {
+        curr = curr->left;
+    }
+    return curr;
+}
+
+/**
+* @brief Delete a node from the BST
+* @param root
+* @param x Value you want to delete
+* @return Node*
+*/
+Node *deleteNode(Node *root, int x)
+{
+    if (root == NULL)
+        return root;
+
+    if (root->key > x)
+    {
+        root->left = deleteNode(root->left, x);
+    }
+    else if (root->key < x)
+    {
+        root->right = deleteNode(root->right, x);
+    }
+    else
+    {
+        if (root->left == NULL)
+        {
+            Node *temp = root->right;
+            delete (root);
+            return temp;
+        }
+        else if (root->right == NULL)
+        {
+            Node *temp = root->left;
+            delete (root);
+            return temp;
+        }
+        else
+        {
+            Node *succ = getSuccessor(root);
+            root->key = succ->key;
+            root->right = deleteNode(root->right, succ->key);
+        }
+    }
+    return root;
+}
+
+/**
+ * @brief To get the minimum closes Node of the given root
+ * 
+ * @param root 
+ * @param x 
+ * @return Node* 
+ */
+Node *getFloor(Node *root, int x)
+{
+    Node *res = NULL;
+    while (root != NULL)
+    {
+        if (root->key == x)
+        {
+            return root;
+        }
+        else if (x < root->key)
+        {
+            root = root->left;
+        }
+        else
+        {
+            res = root;
+            root = root->right;
+        }
+    }
+    return res;
+}
+
+/**
+ * @brief Get the Ceil object
+ * 
+ * @param root 
+ * @param x 
+ * @return Node* 
+ */
+Node *getCeil(Node *root, int x)
+{
+    Node *res = NULL;
+
+    while (root != NULL)
+    {
+        if (root->key == x)
+            return root;
+
+        else if (root->key < x)
+        {
+            root = root->right;
+        }
+
+        else
+        {
+            res = root;
+            root = root->left;
+        }
+    }
+    return res;
 }
 
 int main()

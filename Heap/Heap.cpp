@@ -140,6 +140,10 @@ public:
         for (int i = (size - 2) / 2; i >= 0; i--)
             minHeapify(i);
     }
+
+    void maxHeapify(int i, int n)
+    {
+    }
 };
 
 int main()

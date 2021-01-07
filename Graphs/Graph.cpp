@@ -3,21 +3,123 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void addEdge(vector<int> adj[], int u, int v) {
+/**
+ * @brief Adding Edge to the Graph
+ * 
+ * @param adj 
+ * @param u 
+ * @param v 
+ */
+void addEdge(vector<int> adj[], int u, int v)
+{
 	adj[u].push_back(v);
 	adj[v].push_back(u);
 }
 
-void printGraph(vector<int> adj[], int v) {
-	for (int i = 0; i < v; i++) {
-		for(int x : adj[i]) {
+/**
+ * @brief Print Graph
+ * 
+ * @param adj 
+ * @param v 
+ */
+void printGraph(vector<int> adj[], int v)
+{
+	for (int i = 0; i < v; i++)
+	{
+		for (int x : adj[i])
+		{
 			cout << x << " ";
 		}
 		cout << "\n";
 	}
 }
 
-int main() {
+/**
+ * @brief BFS Traversal, Time Complexity of BFS: O (V+E)
+ * 
+ * @param adj 
+ * @param v 
+ * @param s 
+ */
+void bfs(vector<int> adj[], int v, int s)
+{
+
+	bool visited[v + 1];
+	fill(visited, visited + v + 1, false);
+
+	queue<int> q;
+	visited[s] = true;
+	q.push(s);
+
+	while (!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		cout << u << " ";
+		for (int v : adj[u])
+		{
+			if (!visited[v])
+			{
+				visited[v] = true;
+				q.push(v);
+			}
+		}
+	}
+}
+
+void bfs(vector<int> adj[], int s, bool visited[])
+{
+	queue<int> q;
+	visited[s] = true;
+	q.push(s);
+
+	while (!q.empty())
+	{
+		int u = q.front();
+		q.pop();
+		cout << u << " ";
+
+		for (int v : adj[u])
+		{
+			if (!visited[v])
+			{
+				visited[v] = true;
+				q.push(v);
+			}
+		}
+	}
+}
+
+/**
+ * @brief BFS Traversal, Time Complexity of BFS: O (V+E)
+ * 
+ * @param adj 
+ * @param v 
+ */
+void bfs(vector<int> adj[], int v)
+{
+	// Use to count the no of connected Components
+	int count = 0;
+	// --------------------------------------------
+
+	bool visited[v + 1];
+	fill(visited, visited + v + 1, false);
+
+	for (int i = 0; i < v; i++)
+	{
+		if (!visited[i])
+		{
+			bfs(adj, i, visited);
+			count++;
+		}
+	}
+
+	/******** Printing No. of Connected Components *********/
+	cout << "\nNo of Connected Components: " << count << "\n";
+}
+
+int main()
+{
 
 	// No of vertices
 	int v = 4;
@@ -29,8 +131,11 @@ int main() {
 	addEdge(adj, 0, 2);
 	addEdge(adj, 1, 2);
 
-	printGraph(adj, 4);
+	// printGraph(adj, 4);
+
+	// bfs(adj, 4, 0);
+
+	bfs(adj, 4);
 
 	return 0;
-
 }

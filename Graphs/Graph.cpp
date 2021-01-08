@@ -118,6 +118,59 @@ void bfs(vector<int> adj[], int v)
 	cout << "\nNo of Connected Components: " << count << "\n";
 }
 
+// DFS recursive
+void dfs_rec(vector<int> adj[], int s, bool visited[])
+{
+	visited[s] = true;
+	cout << s << " ";
+
+	for (int u : adj[s])
+	{
+		if (visited[u] == false)
+		{
+			dfs_rec(adj, u, visited);
+		}
+	}
+}
+
+/**
+ * @brief DFS of a Continious Graph, Time Complexity: O(V + E)
+ * 
+ * @param adj 
+ * @param v 
+ * @param s 
+ */
+void dfs(vector<int> adj[], int v, int s)
+{
+
+	bool visited[v];
+	fill(visited, visited + v, false);
+
+	// Calling  DFS Recursive
+	dfs_rec(adj, s, visited);
+}
+
+/**
+ * @brief DSF for continious or discontinious graph, Time Complexity: O(V + E)
+ * 
+ * @param adj 
+ * @param v 
+ */
+void dfs(vector<int> adj[], int v)
+{
+	bool visited[v];
+	fill(visited, visited + v, false);
+
+	for (int i = 0; i < v; i++)
+	{
+		if (!visited[i])
+		{
+			// Calling  DFS Recursive
+			dfs_rec(adj, i, visited);
+		}
+	}
+}
+
 int main()
 {
 
@@ -135,7 +188,9 @@ int main()
 
 	// bfs(adj, 4, 0);
 
-	bfs(adj, 4);
+	// bfs(adj, 4);
+
+	dfs(adj, 4);
 
 	return 0;
 }

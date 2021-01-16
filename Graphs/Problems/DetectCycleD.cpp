@@ -8,6 +8,16 @@ void addEdge(vector<int> adj[], int u, int v)
     adj[u].push_back(v);
 }
 
+/**
+ * @brief Detect Cycle in Directed Graph, T.C : O(V+E)
+ * 
+ * @param adj 
+ * @param s 
+ * @param visited 
+ * @param recStack 
+ * @return true 
+ * @return false 
+ */
 bool dfs_rec(vector<int> adj[], int s, bool visited[], bool recStack[])
 {
 
@@ -19,9 +29,9 @@ bool dfs_rec(vector<int> adj[], int s, bool visited[], bool recStack[])
         if (!visited[u] && dfs_rec(adj, u, visited, recStack))
             return true;
 
-        else if (!recStack[u])
+        else if (recStack[u])
         {
-            return false;
+            return true;
         }
     }
 
